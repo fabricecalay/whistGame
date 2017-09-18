@@ -3,8 +3,8 @@
 /target/
 
 # Config file Idea Intelij
-.idea/**  
-##*.iml
+.idea/**
+*.iml
 
 # Compiled class file
 *.class
