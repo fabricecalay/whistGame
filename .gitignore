@@ -1,5 +1,10 @@
+# Target classes
+
+/target/
+
 # Config file Idea Intelij
 .idea/**
+*.iml
 
 # Compiled class file
 *.class
