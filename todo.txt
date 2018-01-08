@@ -1,0 +1,2 @@
+- dernier pli visible en bas à droite (pour eviter de devoir le demander)
+- petite webcam pour rendre visible les autres joueurs
