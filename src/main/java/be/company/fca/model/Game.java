@@ -9,7 +9,7 @@ public class Game {
     private Deck gameDeck = new Deck();
     private List<Fold> folds = new ArrayList<>();
 
-    private Player[] players = new Player[Constants.NUMBER_OF_PLAYERS];
+    private List<Player> players = new ArrayList<Player>();
 
     private Contract contract;
 
@@ -28,7 +28,7 @@ public class Game {
 
     private void initPlayers(){
         for (int i=0;i<Constants.NUMBER_OF_PLAYERS;i++){
-            players[i]=new Player("Joueur " + (i+1));
+            players.add(new Player("Joueur " + (i+1)));
         }
     }
 
@@ -43,16 +43,16 @@ public class Game {
             throw new RuntimeException("You must create a gameDeck before distribution");
         }
 
-        for (int i = 0; i<players.length;i++){
-            for (int j = 0; j< gameDeck.size()/players.length; j++){
-                players[i].getPlayerDeck().add(gameDeck.get(j + (i*gameDeck.size()/players.length)));
+        for (int i = 0; i<players.size();i++){
+            for (int j = 0; j< gameDeck.size()/players.size(); j++){
+                players.get(i).getPlayerDeck().add(gameDeck.get(j + (i*gameDeck.size()/players.size())));
             }
         }
     }
 
     public void showPlayersDeck(){
-        for (int i = 0; i<players.length;i++){
-            Player player = players[i];
+        for (int i = 0; i<players.size();i++){
+            Player player = players.get(i);
             player.sortDeck();
             System.out.println(player);
             for (Card card : player.getPlayerDeck()){
@@ -66,7 +66,7 @@ public class Game {
      */
     public void chooseContract(){
         contract = new Contract();
-        //TODO : selection d'un atout --> analyse des plis gagnants
+        //TODO : selection d'un contract (avec atout ou sans atout, trou, misere, ...)
     }
 
     /**
@@ -76,20 +76,21 @@ public class Game {
 
         // Chaque joueur joue a son tour et vide progressivement son deck
 
-        int numberOfFolds = players[0].getPlayerDeck().size();
+        int numberOfFolds = players.get(0).getPlayerDeck().size();
+        int winningIndex = 0;
 
         for (int i=0;i<numberOfFolds;i++){
             Fold fold = new Fold();
             folds.add(fold);
-            for (int j=0;j<players.length;j++){
-                Player player = players[j];
+            for (int j=0;j<players.size();j++){
+                Player player = players.get((winningIndex + j) % 4);
                 Card playedCard = player.playCard(this);
                 fold.addCardToFold(player,playedCard);
             }
             // On analyse qui gagne le pli
             Player winningPlayer = fold.getWinningPlayer(contract);
-            // TODO : selection de l'index de depart + utilisation du modulo pour faire jouer les quatre joueurs
-
+            // Selection de l'index du joueur gagnant le pli pour determiner l'ordre de jeu du tour suivant
+            winningIndex = players.indexOf(winningPlayer);
             System.out.println(fold);
             System.out.println("Winning player : " + winningPlayer);
 

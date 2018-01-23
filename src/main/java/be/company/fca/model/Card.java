@@ -52,7 +52,7 @@ public class Card implements Comparable<Card> {
             switch (this){
                 case SPADE:return "SPADE " + Character.toString((char)'\u2660');
                 case CLUB:return "CLUB " + Character.toString((char)'\u2663');
-                case DIAMOND:return "DIAMOND" + Character.toString((char)'\u2666');
+                case DIAMOND:return "DIAMOND " + Character.toString((char)'\u2666');
                 case HEART:return "HEART " + Character.toString((char)'\u2764');
                 default:return "";
             }

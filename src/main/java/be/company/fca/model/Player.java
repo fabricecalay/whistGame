@@ -29,8 +29,8 @@ public class Player {
      */
     public Card playCard(Game game){
 
-        // Etablir la strategie du joueur
-        // tout en garantissant le coup valable
+        // TODO : Etablir la strategie du joueur
+        // TODO : tout en garantissant le coup valable --> avoir une methode pour verifier la validite de la carte jouee
 
         int indexOfCard = 0;
 

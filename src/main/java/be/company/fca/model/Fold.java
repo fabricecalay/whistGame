@@ -19,13 +19,19 @@ public class Fold {
         return getPlayedCards().isEmpty();
     }
 
+    /**
+     * On designe le gagnant du pli sur base des cartes jouees dans le pli
+     * Le pli ne peut pas etre vide
+     * @param contract Contrat en cours
+     * @return Joueur gagnant le pli
+     */
     public Player getWinningPlayer(Contract contract){
 
         if (playedCards.isEmpty()){
             throw new RuntimeException("Fold is empty");
         }
 
-        // Le type de carte
+        // Le type de carte valable pour le pli (hormis l'atout)
         Card.CardType firstCardType = playedCards.get(0).getCard().getCardType();
 
         // S'il y a un atout dans le contrat et s'il y en a au moins un dans le pli, on prend l'atout le plus fort
