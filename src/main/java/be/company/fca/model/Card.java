@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Card {
+public class Card implements Comparable<Card> {
 
     private CardType cardType;
     private CardValue cardValue;
@@ -67,19 +67,14 @@ public class Card {
                 '}';
     }
 
-    public static Comparator<Card> getCardComparator(){
-        return new Comparator<Card>() {
-            @Override
-            public int compare(Card card1, Card card2) {
-                if (card1.cardType.value<card2.cardType.value){
-                    return -1;
-                }else if (card1.cardType.value>card2.cardType.value){
-                    return 1;
-                }else{
-                    return card1.cardValue.compareTo(card2.cardValue);
-                }
-            }
-        };
+    @Override
+    public int compareTo(Card card) {
+        if (this.cardType.value<card.cardType.value){
+            return -1;
+        }else if (this.cardType.value>card.cardType.value){
+            return 1;
+        }else{
+            return this.cardValue.compareTo(card.cardValue);
+        }
     }
-
 }

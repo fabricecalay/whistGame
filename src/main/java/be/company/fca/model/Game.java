@@ -1,8 +1,6 @@
 package be.company.fca.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class Game {
 
@@ -10,7 +8,7 @@ public class Game {
 
     private Player[] players = new Player[4];
 
-    private GameType gameType;
+    private Contract contract;
 
     public void showDeck(){
         // Show the gameDeck
@@ -57,6 +55,21 @@ public class Game {
                 System.out.println(card);
             }
         }
+    }
+
+    public void launchGame(){
+
+        // Chaque joueur joue a son tour et vide progressivement son deck
+
+        for (int i=0;i<players.length;i++){
+            players[i].playCard(this);
+        }
+
+        // REGLE STRICTE Connaitre la premiere carte car on est oblige de suivre
+        // Connaitre les cartes jouees
+        // Connaitre le contrat en cours --> l'atout egalement pour savoir qui gagne le pli
+        // REGLE STRICTE Savoir si la carte jouee est valable
+
     }
 
 }

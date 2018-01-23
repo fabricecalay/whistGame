@@ -16,7 +16,14 @@ public class Player {
      * Permet de trier les cartes de la plus faible à la plus forte
      */
     public void sortDeck(){
-        Collections.sort(playerDeck,Card.getCardComparator());
+        Collections.sort(playerDeck);
+    }
+
+    /**
+     * Permet de jouer une carte
+     */
+    public void playCard(Game game){
+
     }
 
 }

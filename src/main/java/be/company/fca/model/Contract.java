@@ -1,4 +1,4 @@
 package be.company.fca.model;
 
-public class GameType {
+public class Contract {
 }
