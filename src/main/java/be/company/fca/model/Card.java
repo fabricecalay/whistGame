@@ -59,6 +59,14 @@ public class Card implements Comparable<Card> {
         }
     }
 
+    public CardType getCardType() {
+        return cardType;
+    }
+
+    public CardValue getCardValue() {
+        return cardValue;
+    }
+
     @Override
     public String toString() {
         return "Card{" +

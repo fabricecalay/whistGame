@@ -17,7 +17,9 @@ public class App {
         Game game = new Game();
         game.initGame();
 
-        game.showPlayersDeck();
+        game.chooseContract();
+//        game.showPlayersDeck();
 
+        game.launchCardGame();
     }
 }
