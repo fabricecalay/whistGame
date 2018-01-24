@@ -1,3 +1,10 @@
 - dernier pli visible en bas à droite (pour eviter de devoir le demander)
 - petite webcam pour rendre visible les autres joueurs
 - calculer le nombre de points d'un jeu pour elaborer une strategie
+First step :
+-	Stratégie de base consistant à jouer la carte la plus forte (ou la plus faible pouvant gagner le pli)
+-	Etablir les contrats de base (emballage et seul)
+-	Prévoir le jeu de la petite misère : stratégie plus complexe à établir car il faut se débarrasser des grosses cartes  et faire en sorte que le joueur qui joue la misère ne gagne pas les plis
+Stratégie :
+-	Etablir sur base des cartes déjà jouées
+-	Etablir sur base de la position du joueur

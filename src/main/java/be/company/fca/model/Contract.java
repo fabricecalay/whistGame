@@ -2,6 +2,8 @@ package be.company.fca.model;
 
 public class Contract {
 
+
+
     /**
      * Couleur de l'atout (s'il y en a un)
      */
