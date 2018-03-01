@@ -1,5 +1,7 @@
 package be.company.fca.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -108,6 +110,13 @@ public class Game {
 
     public List<Fold> getFolds() {
         return folds;
+    }
+
+    public Fold getCurrentFold(){
+        if (folds.size()>0){
+            return folds.get(folds.size() - 1);
+        }
+        return null;
     }
 
     public Contract getContract() {

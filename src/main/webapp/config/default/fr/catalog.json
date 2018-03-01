@@ -1,0 +1,13 @@
+[
+  {
+    "code": "TEST",
+    "label": "ceci est un test",
+    "mapServices": [ {
+        "serviceId": 123456,
+        "label": "Thermo Andenne/Fernelmont",
+        "type": "AGS_DYNAMIC",
+        "url": "http://geoservices.wallonie.be/arcgis/rest/services/HABITAT/BEP_THERMO_ANDEN_FERNE/MapServer"
+    }
+    ]
+  }
+]

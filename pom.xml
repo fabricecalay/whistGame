@@ -27,9 +27,25 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.1.RELEASE</version>
+        <version>1.5.9.RELEASE</version>
     </parent>
+
+    <repositories>
+        <repository>
+            <id>e-contract.be</id>
+            <url>https://www.e-contract.be/maven2/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+
+        <!--eContract-->
+
+        <dependency>
+            <groupId>be.e_contract.dssp</groupId>
+            <artifactId>dssp-client</artifactId>
+            <version>1.5.1</version>
+        </dependency>
 
         <!--ANGULAR-->
         <dependency>
@@ -73,6 +89,62 @@
             <!--<groupId>org.springframework.data</groupId>-->
             <!--<artifactId>spring-data-rest-hal-browser</artifactId>-->
         <!--</dependency>-->
+
+        <!--SPRING-DATA-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-security</artifactId>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.security.oauth</groupId>-->
+            <!--<artifactId>spring-security-oauth2</artifactId>-->
+        <!--</dependency>-->
+
+        <!--HIBERNATE-SPATIAL -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-spatial</artifactId>
+            <version>5.2.13.Final</version>
+        </dependency>
+
+        <!-- dependances a la librairie ZK -->
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkbind</artifactId>
+            <version>${zk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zul</artifactId>
+            <version>${zk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zkplus</artifactId>
+            <version>${zk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.zk</groupId>
+            <artifactId>zhtml</artifactId>
+            <version>${zk.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.zkoss.common</groupId>
+            <artifactId>zweb</artifactId>
+            <version>${zk.version}</version>
+        </dependency>
+
+
         <!-- Pour Basic DataSource -->
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -91,8 +163,10 @@
             <artifactId>postgresql</artifactId>
             <version>9.3-1102-jdbc41</version>
         </dependency>
+
     </dependencies>
   <properties>
       <source.version>1.8</source.version>
+      <zk.version>8.5.0</zk.version>
   </properties>
 </project>

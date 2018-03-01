@@ -1,0 +1,8 @@
+<zk>
+    <style src="webjars/bootstrap/4.0.0/css/bootstrap.css" />
+    <script src="webjars/bootstrap/4.0.0/js/bootstrap.js" />
+    <window apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('be.company.fca.view.GameViewModel')">
+        <!--<label value="@bind(vm.name)"/>-->
+        <button onClick="@command('newGame')" label="Start New Game" />
+    </window>
+</zk>
