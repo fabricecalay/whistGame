@@ -8,16 +8,16 @@ public class Player {
 
     //TODO : pour le joueur humain, proposer une aide au joueur ("meilleure carte")
 
-    private Long id;
+    private Integer id;
     private String name;
     private String nickname;
     private List<Card> playerDeck = new ArrayList<>();
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
