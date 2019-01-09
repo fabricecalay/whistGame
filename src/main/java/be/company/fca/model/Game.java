@@ -62,8 +62,6 @@ public class Game {
             }
         }
 
-
-
     }
 
     /**
@@ -115,11 +113,32 @@ public class Game {
         return folds;
     }
 
-    public Fold getCurrentFold(){
+    /**
+     * Permet de recuperer le dernier pli complet
+     * @return
+     */
+    public Fold getLastCompletedFold(){
         if (folds.size()>0){
-            return folds.get(folds.size() - 1);
+            for (int i=0;i<folds.size();i++){
+                Fold fold = folds.get(folds.size()-i-1);
+                if (fold.getPlayedCards().size()==4){
+                    return fold;
+                }
+            }
         }
         return null;
+    }
+
+    public Fold getCurrentFold(){
+        if (folds.size()>0){
+            Fold fold = folds.get(folds.size() - 1);
+            if (fold.getPlayedCards().size()<4){
+                return fold;
+            }
+        }
+        Fold newFold =  new Fold();
+        this.folds.add(newFold);
+        return newFold;
     }
 
     public Contract getContract() {

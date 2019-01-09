@@ -1,6 +1,7 @@
 package be.company.fca;
 
 import be.company.fca.model.Card;
+import be.company.fca.model.Fold;
 import be.company.fca.model.Game;
 import be.company.fca.model.Player;
 import javafx.application.Application;
@@ -25,10 +26,12 @@ public class App extends Application {
         Application.launch(App.class, args);
     }
 
+    private Game game;
+
     @Override
     public void start(Stage primaryStage) {
 
-        Game game = new Game();
+        game = new Game();
         game.initGame();
         game.chooseContract();
 
@@ -48,7 +51,14 @@ public class App extends Application {
                 btn.setText(card.getDisplayLabel());
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) {
-                        System.out.println(card.toString());
+
+                        boolean validCard = player.isCardValid(game.getCurrentFold(),card);
+                        if (validCard){
+                            game.getCurrentFold().addCardToFold(player, card);
+                            System.err.println("Carte jouee par " + player.getNickname() + " : " + card.getDisplayLabel());
+                        }else{
+                            System.err.println("Carte non-autorisée");
+                        }
                     }
                 });
                 root.add(btn,i,j);
@@ -60,6 +70,7 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
     public static void maisn(String[] args) throws Exception{
 

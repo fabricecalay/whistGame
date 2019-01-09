@@ -59,6 +59,47 @@ public class Player {
         Collections.sort(playerDeck);
     }
 
+
+
+
+
+    /**
+     * Permet de verifier la validite d'une carte qu'un joueur souhaite jouer
+     * @param currentFold
+     * @param card
+     * @return true si la carte est valable
+     */
+    public boolean isCardValid(Fold currentFold, Card card){
+        if (currentFold!=null){
+            Card.CardType validCardType = currentFold.getValidCardType();
+            if (validCardType!=null) {
+                if (this.hasCardsOfType(validCardType)){
+                    if (validCardType.equals(card.getCardType())){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Permet de savoir si le deck du joueur contient des cartes d'un type donne
+     * @param cardType
+     * @return
+     */
+    public boolean hasCardsOfType(Card.CardType cardType){
+        for (Card card : this.getPlayerDeck()){
+            if (cardType.equals(card.getCardType())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     /**
      * Permet de jouer une carte
      */
@@ -67,44 +108,6 @@ public class Player {
         playerDeck.remove(cardToPlay);
         System.err.println("Carte jouée par joueur "  + this.nickname + " : " + cardToPlay);
         return cardToPlay;
-    }
-
-    /**
-     * Permet de recuperer le type de carte valable pour ce pli (premiere carte jouee)
-     * @param game Jeu en cours
-     * @return Type de carte jouee en premier, null si aucune carte jouee
-     */
-    private Card.CardType getValidCardType(Game game) {
-
-        // On regarde la premiere carte jouee dans le pli en cours
-        Fold currentFold = game.getCurrentFold();
-
-        // Si une carte a deja ete jouee, la premiere definit le type de carte valable pour ce tour de jeu
-        // Si le joueur en a une, il est obligée de la jouer
-        Card.CardType validCardType = null;
-        if (!currentFold.isEmpty()) {
-            PlayedCard firstCardOfFold = currentFold.getPlayedCards().get(0);
-            validCardType = firstCardOfFold.getCard().getCardType();
-        }
-
-        return validCardType;
-    }
-
-
-    /**
-     * Permet de verifier la validite d'une carte qu'un joueur souhaite jouer
-     * @param game
-     * @param card
-     * @return true si la carte est valable
-     */
-    public boolean isCardValid(Game game, Card card){
-        Card.CardType validCardType = getValidCardType(game);
-        if (validCardType!=null) {
-            if (!validCardType.equals(card.getCardType())) {
-                return false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -122,7 +125,10 @@ public class Player {
 
         // On recupere le type de carte valable (premiere carte jouee)
 
-        Card.CardType validCardType = getValidCardType(game);
+        Card.CardType validCardType = null;
+        if (game.getCurrentFold()!=null) {
+            validCardType = game.getCurrentFold().getValidCardType();
+        }
 
         // S'il y a un type de carte defini,
 

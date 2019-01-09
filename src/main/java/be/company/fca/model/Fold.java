@@ -11,6 +11,22 @@ public class Fold {
         return playedCards;
     }
 
+    /**
+     * Permet de recuperer le type de carte valable pour ce pli (premiere carte jouee)
+     * @return Type de carte jouee en premier, null si aucune carte jouee
+     */
+    public Card.CardType getValidCardType() {
+        // Si une carte a deja ete jouee, la premiere definit le type de carte valable pour ce tour de jeu
+        // Si le joueur en a une, il est obligée de la jouer
+        Card.CardType validCardType = null;
+        if (!playedCards.isEmpty()) {
+            PlayedCard firstCardOfFold = playedCards.get(0);
+            validCardType = firstCardOfFold.getCard().getCardType();
+        }
+
+        return validCardType;
+    }
+
     public void addCardToFold(Player player, Card card){
         playedCards.add(new PlayedCard(player,card));
     }
