@@ -31,36 +31,7 @@
         <!--<version>2.0.0.RELEASE</version>-->
     </parent>
 
-    <repositories>
-        <repository>
-            <id>e-contract.be</id>
-            <url>https://www.e-contract.be/maven2/</url>
-        </repository>
-    </repositories>
-
     <dependencies>
-
-        <!--eContract-->
-
-        <dependency>
-            <groupId>be.e_contract.dssp</groupId>
-            <artifactId>dssp-client</artifactId>
-            <version>1.5.1</version>
-        </dependency>
-
-        <!--ANGULAR-->
-        <dependency>
-            <groupId>org.webjars.bower</groupId>
-            <artifactId>angular</artifactId>
-            <version>1.6.8</version>
-        </dependency>
-
-        <!--BOOTSTRAP-->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>4.0.0</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -111,41 +82,6 @@
             <!--<artifactId>spring-security-oauth2</artifactId>-->
         <!--</dependency>-->
 
-        <!--HIBERNATE-SPATIAL -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-spatial</artifactId>
-            <version>5.2.13.Final</version>
-        </dependency>
-
-        <!-- dependances a la librairie ZK -->
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkbind</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zul</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zkplus</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.zk</groupId>
-            <artifactId>zhtml</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.zkoss.common</groupId>
-            <artifactId>zweb</artifactId>
-            <version>${zk.version}</version>
-        </dependency>
-
-
         <!-- Pour Basic DataSource -->
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -168,6 +104,5 @@
     </dependencies>
   <properties>
       <source.version>1.8</source.version>
-      <zk.version>8.5.0</zk.version>
   </properties>
 </project>

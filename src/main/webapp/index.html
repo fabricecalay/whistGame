@@ -1,43 +1,8 @@
 <!DOCTYPE html>
-<html ng-app>
+<html>
 <head>
-    <link rel="stylesheet" href="webjars/bootstrap/4.0.0/css/bootstrap.css"/>
-    <script src="webjars/angular/1.6.8/angular.min.js"></script>
-    <script src="webjars/bootstrap/4.0.0/js/bootstrap.js"></script>
-    <script type="text/javascript">var djConfig = { parseOnLoad : true, locale:"fr", async: true,packages: [{
-                name: 'exemple',
-                location: '/widgets'
-            }] }; </script>
-    <!-- Inclusion de l'API du Geoviewer -->
-    <script type="text/javascript" src="//geoservices.wallonie.be/geoviewer/4.0?t=1QBKY2OEN5"></script>
-    <link rel="stylesheet" type="text/css" href="//geoservices.wallonie.be/geoviewer/style/4.0/style.css" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-
-    <script type="text/javascript">
-		require(["spw/api/SpwViewer", "dojo/ready"], function(SpwViewer, ready){
-			ready(function(){
-				var monViewer = SpwViewer.getInstance();
-				monViewer.placeAt("spwViewerDiv").startup();
-			});
-		});
-    </script>
-
 </head>
-<body class="claro">
-    <!--<div>-->
-        <!--<div class="container">-->
-        <!--<label>Name:</label>-->
-        <!--<input type="text" ng-model="yourName" placeholder="Enter a name here">-->
-        <!--<hr>-->
-        <!--<h1>Hello {{yourName}}!</h1>-->
-            <!--<div class="row">-->
-                <!--<div class="col-md-4">TEST</div>-->
-                <!--<div class="col-md-4">TEST</div>-->
-                <!--<div class="col-md-4">TEST</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-    <div id="spwViewerDiv" style="width:100%;height:70%;" ></div>
-
+<body>
+    App started
 </body>
 </html>
