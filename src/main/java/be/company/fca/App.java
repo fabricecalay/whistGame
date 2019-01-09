@@ -33,6 +33,7 @@ public class App extends Application {
 
         game = new Game();
         game.initGame();
+        game.sortPlayersDeck();
         game.chooseContract();
 
         // Affichage des decks
@@ -58,8 +59,8 @@ public class App extends Application {
                         if (player.equals(nextPlayer)){
                             boolean validCard = player.isCardValid(game.getCurrentFold(),card);
                             if (validCard){
-                                game.getCurrentFold().addCardToFold(player, card);
                                 System.err.println("Carte jouee par " + player.getNickname() + " : " + card.getDisplayLabel());
+                                game.getCurrentFold().addCardToFold(game.getContract(),player, card);
                                 root.getChildren().remove(btn);
                             }else{
                                 System.err.println("Carte non-autorisée");

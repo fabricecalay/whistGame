@@ -27,8 +27,12 @@ public class Fold {
         return validCardType;
     }
 
-    public void addCardToFold(Player player, Card card){
+    public void addCardToFold(Contract contract,Player player, Card card){
+        player.playCard(card);
         playedCards.add(new PlayedCard(player,card));
+        if (playedCards.size()==4){
+            System.err.println("Joueur gagnant : " + this.getWinningPlayer(contract));
+        }
     }
 
     public boolean isEmpty(){

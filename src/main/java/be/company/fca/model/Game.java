@@ -52,6 +52,13 @@ public class Game {
         }
     }
 
+    public void sortPlayersDeck(){
+        for (int i = 0; i<players.size();i++) {
+            Player player = players.get(i);
+            player.sortDeck();
+        }
+    }
+
     public void showPlayersDeck(){
         for (int i = 0; i<players.size();i++){
             Player player = players.get(i);
@@ -87,8 +94,9 @@ public class Game {
             folds.add(fold);
             for (int j=0;j<players.size();j++){
                 Player player = players.get((winningIndex + j) % 4);
-                Card playedCard = player.playCard(this);
-                fold.addCardToFold(player,playedCard);
+                Card cardToPlay = player.selectCardToPlay(this);
+                Card playedCard = player.playCard(cardToPlay);
+                fold.addCardToFold(contract,player,playedCard);
             }
             // On analyse qui gagne le pli
             Player winningPlayer = fold.getWinningPlayer(contract);

@@ -95,12 +95,19 @@ public class Player {
         return false;
     }
 
+    /**
+     * Permet de selectionner la carte a jouer
+     * @param game
+     * @return
+     */
+    public Card selectCardToPlay(Game game){
+        return getCardToPlay(game);
+    }
 
     /**
      * Permet de jouer une carte
      */
-    public Card playCard(Game game){
-        Card cardToPlay = getCardToPlay(game);
+    public Card playCard(Card cardToPlay){
         playerDeck.remove(cardToPlay);
         System.err.println("Carte jouée par joueur "  + this.nickname + " : " + cardToPlay);
         return cardToPlay;
