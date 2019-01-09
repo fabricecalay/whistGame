@@ -39,7 +39,7 @@ public class App extends Application {
 
         primaryStage.setTitle("App");
         GridPane root = new GridPane();
-        Scene scene = new Scene(root, 300, 250, Color.GRAY);
+        Scene scene = new Scene(root, Color.GRAY);
 
         int i = 0;
         for (Player player : game.getPlayers()){
@@ -52,13 +52,22 @@ public class App extends Application {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) {
 
-                        boolean validCard = player.isCardValid(game.getCurrentFold(),card);
-                        if (validCard){
-                            game.getCurrentFold().addCardToFold(player, card);
-                            System.err.println("Carte jouee par " + player.getNickname() + " : " + card.getDisplayLabel());
+                        // TODO : verifier qu'il s'agit bien du bon joueur qui joue une carte
+
+                        Player nextPlayer = game.getNextPlayerToPlay();
+                        if (player.equals(nextPlayer)){
+                            boolean validCard = player.isCardValid(game.getCurrentFold(),card);
+                            if (validCard){
+                                game.getCurrentFold().addCardToFold(player, card);
+                                System.err.println("Carte jouee par " + player.getNickname() + " : " + card.getDisplayLabel());
+                                root.getChildren().remove(btn);
+                            }else{
+                                System.err.println("Carte non-autorisée");
+                            }
                         }else{
-                            System.err.println("Carte non-autorisée");
+                            System.err.println("Joueur non-autorisé");
                         }
+
                     }
                 });
                 root.add(btn,i,j);
@@ -66,6 +75,7 @@ public class App extends Application {
             }
             i++;
         }
+
 
         primaryStage.setScene(scene);
         primaryStage.show();

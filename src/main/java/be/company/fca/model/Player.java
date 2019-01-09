@@ -59,10 +59,6 @@ public class Player {
         Collections.sort(playerDeck);
     }
 
-
-
-
-
     /**
      * Permet de verifier la validite d'une carte qu'un joueur souhaite jouer
      * @param currentFold

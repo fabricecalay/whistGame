@@ -148,4 +148,25 @@ public class Game {
     public List<Player> getPlayers() {
         return players;
     }
+
+    /**
+     * Permet de recuperer le prochain joueur qui doit jouer
+     * @return
+     */
+    public Player getNextPlayerToPlay(){
+        Fold currentFold = getCurrentFold();
+        if (currentFold.isEmpty()){
+            Fold lastCompletedFold = getLastCompletedFold();
+            if (lastCompletedFold!=null){
+                return lastCompletedFold.getWinningPlayer(this.contract);
+            }else{
+                // TODO : Premier pli de la partie --> en fonction du donneur
+                return players.get(0);
+            }
+        }else{
+            PlayedCard lastPlayedCard = currentFold.getPlayedCards().get(currentFold.getPlayedCards().size()-1);
+            int lastPlayerIndex = players.indexOf(lastPlayedCard.getPlayer());
+            return players.get((lastPlayerIndex+1)%4);
+        }
+    }
 }
