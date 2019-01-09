@@ -1,32 +1,70 @@
 package be.company.fca;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import be.company.fca.model.Card;
+import be.company.fca.model.Game;
+import be.company.fca.model.Player;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 
 /**
  * First class of Whist Game
  * Created by fca on 18-09-17.
  */
-@SpringBootApplication
-public class App {
+public class App extends Application {
 
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
+        Application.launch(App.class, args);
+    }
 
-//        System.setProperty("http.proxyHost", "proxy-http.spw.wallonie.be");
-//        System.setProperty("http.proxyPort", "3129");
-//
-//        System.setProperty("https.proxyHost", "proxy-http.spw.wallonie.be");
-//        System.setProperty("https.proxyPort", "3129");
+    @Override
+    public void start(Stage primaryStage) {
 
-        SpringApplication.run(App.class, args);
+        Game game = new Game();
+        game.initGame();
+        game.chooseContract();
 
-//        Game game = new Game();
-//        game.initGame();
-//
-//        game.chooseContract();
-////        game.showPlayersDeck();
-//
+        // Affichage des decks
+
+        primaryStage.setTitle("App");
+        GridPane root = new GridPane();
+        Scene scene = new Scene(root, 300, 250, Color.GRAY);
+
+        int i = 0;
+        for (Player player : game.getPlayers()){
+            int j = 0;
+            root.add(new Label(player.getNickname()),i,j);
+            j++;
+            for (Card card : player.getPlayerDeck()){
+                Button btn = new Button();
+                btn.setText(card.getDisplayLabel());
+                btn.setOnAction(new EventHandler<ActionEvent>() {
+                    public void handle(ActionEvent event) {
+                        System.out.println(card.toString());
+                    }
+                });
+                root.add(btn,i,j);
+                j++;
+            }
+            i++;
+        }
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void maisn(String[] args) throws Exception{
+
+//        game.showPlayersDeck();
+
 //        game.launchCardGame();
     }
 }

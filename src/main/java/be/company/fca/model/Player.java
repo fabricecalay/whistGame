@@ -65,6 +65,7 @@ public class Player {
     public Card playCard(Game game){
         Card cardToPlay = getCardToPlay(game);
         playerDeck.remove(cardToPlay);
+        System.err.println("Carte jouée par joueur "  + this.nickname + " : " + cardToPlay);
         return cardToPlay;
     }
 

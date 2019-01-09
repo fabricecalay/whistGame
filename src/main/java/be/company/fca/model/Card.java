@@ -67,6 +67,10 @@ public class Card implements Comparable<Card> {
         return cardValue;
     }
 
+    public String getDisplayLabel(){
+        return cardValue.value + " " + cardType.toString();
+    }
+
     @Override
     public String toString() {
         return "Card{" +

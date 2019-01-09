@@ -61,6 +61,9 @@ public class Game {
                 System.out.println(card);
             }
         }
+
+
+
     }
 
     /**
@@ -93,7 +96,7 @@ public class Game {
             Player winningPlayer = fold.getWinningPlayer(contract);
             // Selection de l'index du joueur gagnant le pli pour determiner l'ordre de jeu du tour suivant
             winningIndex = players.indexOf(winningPlayer);
-            System.out.println(fold);
+//            System.out.println(fold);
             System.out.println("Winning player : " + winningPlayer);
 
         }
@@ -121,5 +124,9 @@ public class Game {
 
     public Contract getContract() {
         return contract;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
     }
 }
