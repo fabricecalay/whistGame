@@ -63,10 +63,10 @@ public class App extends Application {
                                 game.getCurrentFold().addCardToFold(game.getContract(),player, card);
                                 root.getChildren().remove(btn);
                             }else{
-                                System.err.println("Carte non-autorisée");
+                                //System.err.println("Carte non-autorisée");
                             }
                         }else{
-                            System.err.println("Joueur non-autorisé");
+                            //System.err.println("Joueur non-autorisé");
                         }
 
                     }
