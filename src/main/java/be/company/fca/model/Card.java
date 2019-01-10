@@ -16,19 +16,19 @@ public class Card implements Comparable<Card> {
     }
 
     enum CardValue {
-        TWO(1),
-        THREE(2),
-        FOUR(3),
-        FIVE(4),
-        SIX(5),
-        SEVEN(6),
-        EIGHT(7),
-        NINE(8),
-        TEN(9),
-        JACK(10),
-        QUEEN(11),
-        KING(12),
-        ACE(13);
+        TWO(2),
+        THREE(3),
+        FOUR(4),
+        FIVE(5),
+        SIX(6),
+        SEVEN(7),
+        EIGHT(8),
+        NINE(9),
+        TEN(10),
+        JACK(11),
+        QUEEN(12),
+        KING(13),
+        ACE(14);
 
         private Integer value;
         CardValue(int value) {
@@ -50,10 +50,10 @@ public class Card implements Comparable<Card> {
         @Override
         public String toString() {
             switch (this){
-                case SPADE:return "SPADE " + Character.toString((char)'\u2660');
-                case CLUB:return "CLUB " + Character.toString((char)'\u2663');
-                case DIAMOND:return "DIAMOND " + Character.toString((char)'\u2666');
-                case HEART:return "HEART " + Character.toString((char)'\u2764');
+                case SPADE:return Character.toString((char)'\u2660');
+                case CLUB:return Character.toString((char)'\u2663');
+                case DIAMOND:return Character.toString((char)'\u2666');
+                case HEART:return Character.toString((char)'\u2764');
                 default:return "";
             }
         }
