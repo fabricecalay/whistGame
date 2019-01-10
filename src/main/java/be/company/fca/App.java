@@ -42,14 +42,21 @@ public class App extends Application {
         game.sortPlayersDeck();
         game.chooseContract();
 
-        // Affichage des decks
 
         primaryStage.setTitle("App");
-        centralZone = new GridPane();
-        centralZone.setPadding(new Insets(15, 15, 15, 15));
-        centralZone.setAlignment(Pos.CENTER);
+
+        BorderPane globalPane = new BorderPane();
+        HBox hbox = new HBox();
+        Label label = new Label(game.getPlayers().get(1).getNickname());
+        label.setRotate(270.0);
+        hbox.getChildren().add(label);
+        hbox.setAlignment(Pos.CENTER);
+        globalPane.setLeft(hbox);
+
+        // Affichage des decks
 
         BorderPane border = new BorderPane();
+        globalPane.setCenter(border);
 
         Map<Player, Pane> paneMap = new HashMap<>();
         HBox bottom = new HBox();
@@ -76,9 +83,14 @@ public class App extends Application {
         border.setRight(right);
         paneMap.put(game.getPlayers().get(3),right);
 
+        // Zone de jeu centrale
+
+        centralZone = new GridPane();
+        centralZone.setPadding(new Insets(15, 15, 15, 15));
+        centralZone.setAlignment(Pos.CENTER);
+
         border.setCenter(centralZone);
 
-        Scene scene = new Scene(border, Color.GRAY);
 
         int i = 0;
         for (Player player : game.getPlayers()){
@@ -91,7 +103,7 @@ public class App extends Application {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) {
 
-                        // TODO : verifier qu'il s'agit bien du bon joueur qui joue une carte
+                        // Verifier qu'il s'agit bien du bon joueur qui joue une carte
 
                         Player nextPlayer = game.getNextPlayerToPlay();
                         if (player.equals(nextPlayer)){
@@ -117,6 +129,7 @@ public class App extends Application {
         }
 
 
+        Scene scene = new Scene(globalPane, Color.GRAY);
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -12,6 +12,7 @@ public class Game {
     private List<Fold> folds = new ArrayList<>();
 
     private List<Player> players = new ArrayList<Player>();
+    private Player firstPlayerToPlay;
 
     private Contract contract;
 
@@ -32,6 +33,8 @@ public class Game {
         for (int i=0;i<Constants.NUMBER_OF_PLAYERS;i++){
             players.add(new Player("Joueur " + (i+1)));
         }
+        // TODO : Premier joueur de la partie --> en fonction du donneur et en fonction du contrat (par exemple, abondance)
+        firstPlayerToPlay = players.get(0);
     }
 
     public void initGame(){
@@ -168,8 +171,7 @@ public class Game {
             if (lastCompletedFold!=null){
                 return lastCompletedFold.getWinningPlayer(this.contract);
             }else{
-                // TODO : Premier pli de la partie --> en fonction du donneur
-                return players.get(0);
+                return firstPlayerToPlay;
             }
         }else{
             PlayedCard lastPlayedCard = currentFold.getPlayedCards().get(currentFold.getPlayedCards().size()-1);
