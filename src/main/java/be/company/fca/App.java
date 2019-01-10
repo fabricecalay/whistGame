@@ -42,16 +42,35 @@ public class App extends Application {
         game.sortPlayersDeck();
         game.chooseContract();
 
-
         primaryStage.setTitle("App");
 
         BorderPane globalPane = new BorderPane();
-        HBox hbox = new HBox();
-        Label label = new Label(game.getPlayers().get(1).getNickname());
-        label.setRotate(270.0);
-        hbox.getChildren().add(label);
-        hbox.setAlignment(Pos.CENTER);
-        globalPane.setLeft(hbox);
+        HBox bottomHbox = new HBox();
+        Label bottomLabel = new Label(game.getPlayers().get(0).getNickname());
+        bottomHbox.getChildren().add(bottomLabel);
+        bottomHbox.setAlignment(Pos.CENTER);
+        globalPane.setBottom(bottomHbox);
+
+        HBox leftHbox = new HBox();
+        Label leftLabel = new Label(game.getPlayers().get(1).getNickname());
+        leftLabel.setRotate(270.0);
+        leftHbox.getChildren().add(leftLabel);
+        leftHbox.setAlignment(Pos.CENTER);
+        globalPane.setLeft(leftHbox);
+
+        HBox topHbox = new HBox();
+        Label topLabel = new Label(game.getPlayers().get(2).getNickname());
+        topLabel.setRotate(180.0);
+        topHbox.getChildren().add(topLabel);
+        topHbox.setAlignment(Pos.CENTER);
+        globalPane.setTop(topHbox);
+
+        HBox rightHbox = new HBox();
+        Label rightLabel = new Label(game.getPlayers().get(3).getNickname());
+        rightLabel.setRotate(90.0);
+        rightHbox.getChildren().add(rightLabel);
+        rightHbox.setAlignment(Pos.CENTER);
+        globalPane.setRight(rightHbox);
 
         // Affichage des decks
 
