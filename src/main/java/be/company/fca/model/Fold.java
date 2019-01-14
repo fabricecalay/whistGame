@@ -27,12 +27,24 @@ public class Fold {
         return validCardType;
     }
 
-    public void addCardToFold(Contract contract,Player player, Card card){
-        player.playCard(card);
-        playedCards.add(new PlayedCard(player,card));
-        if (playedCards.size()==4){
-            System.err.println("Joueur gagnant : " + this.getWinningPlayer(contract));
+    /**
+     * Permet d'ajouter une carte dans un pli
+     * @param contract
+     * @param player
+     * @param card
+     * @return true si la carte a pu etre ajoutee, false si le nombre de cartes est deja atteint (4)
+     */
+    public boolean addCardToFold(Contract contract,Player player, Card card){
+        if (playedCards.size()<4){
+            player.playCard(card);
+            playedCards.add(new PlayedCard(player,card));
+            System.err.println("Carte jouee par " + player.getNickname() + " : " + card.getDisplayLabel());
+            if (playedCards.size()==4){
+                System.err.println("Joueur gagnant : " + this.getWinningPlayer(contract));
+            }
+            return true;
         }
+        return false;
     }
 
     public boolean isEmpty(){

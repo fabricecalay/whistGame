@@ -140,6 +140,22 @@ public class Game {
         return null;
     }
 
+    public Fold getFoldToPlay(){
+        Fold currentFold = getCurrentFold();
+        if (currentFold!=null){
+            if (currentFold.getPlayedCards().size()<4) {
+                return currentFold;
+            }
+        }
+        Fold foldToPlay = new Fold();
+        this.folds.add(foldToPlay);
+        return foldToPlay;
+    }
+
+    /**
+     * Pli en cours
+     * @return
+     */
     public Fold getCurrentFold(){
         if (folds.size()>0){
             Fold fold = folds.get(folds.size() - 1);
@@ -147,9 +163,7 @@ public class Game {
                 return fold;
             }
         }
-        Fold newFold =  new Fold();
-        this.folds.add(newFold);
-        return newFold;
+        return null;
     }
 
     public Contract getContract() {
@@ -166,7 +180,7 @@ public class Game {
      */
     public Player getNextPlayerToPlay(){
         Fold currentFold = getCurrentFold();
-        if (currentFold.isEmpty()){
+        if (currentFold==null || currentFold.isEmpty()){
             Fold lastCompletedFold = getLastCompletedFold();
             if (lastCompletedFold!=null){
                 return lastCompletedFold.getWinningPlayer(this.contract);
@@ -178,5 +192,20 @@ public class Game {
             int lastPlayerIndex = players.indexOf(lastPlayedCard.getPlayer());
             return players.get((lastPlayerIndex+1)%4);
         }
+    }
+
+    /**
+     * Permet de determiner si la partie est termine
+     * Ex : nombre de plis joues, misere perdue
+     * @return
+     */
+    public boolean isFinished(){
+        //TODO : gerer le cas de la misere
+        if (folds.size()==1){
+            if (folds.get(folds.size()-1).getPlayedCards().size()==4){
+                return true;
+            }
+        }
+        return false;
     }
 }
