@@ -54,8 +54,8 @@ public class App extends Application {
     public void start(Stage primaryStage) {
 
         primaryStage.setTitle("App");
-        primaryStage.setMinWidth(500.0);
-        primaryStage.setMinHeight(500.0);
+        primaryStage.setMinWidth(550.0);
+        primaryStage.setMinHeight(550.0);
 
         BorderPane globalPane = new BorderPane();
         HBox bottomHbox = new HBox();
