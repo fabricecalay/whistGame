@@ -33,7 +33,9 @@ public class App extends Application {
     private List<Player> players;
     private Player donneur;
 
-    private Game game;
+    private List<Game> partiesJouees=new ArrayList<>();
+
+    private Game currentGame;
     private Map<Player,Integer> positionMap=new HashMap<>();
     private Map<Integer, Pane> paneMap = new HashMap<>();
     private GridPane centralZone;
@@ -164,14 +166,14 @@ public class App extends Application {
         }
         centralZone.getChildren().clear();
 
-        game = new Game();
-        game.initGame(getFourPlayers(),getFirstPlayer());
+        currentGame = new Game();
+        currentGame.initGame(getFourPlayers(),getFirstPlayer());
 
         positionMap.clear();
         initPlayersNameAndPosition();
 
-        game.sortPlayersDeck();
-        game.chooseContract();
+        currentGame.sortPlayersDeck();
+        currentGame.chooseContract();
 
         drawGameBoard();
     }
@@ -180,20 +182,20 @@ public class App extends Application {
      * Permet d'afficher le nom des joueurs
      */
     public void initPlayersNameAndPosition(){
-        bottomPlayerLabel.setText(game.getPlayers().get(0).getNickname());
-        positionMap.put(game.getPlayers().get(0),0);
-        leftPlayerLabel.setText(game.getPlayers().get(1).getNickname());
-        positionMap.put(game.getPlayers().get(1),1);
-        topPlayerLabel.setText(game.getPlayers().get(2).getNickname());
-        positionMap.put(game.getPlayers().get(2),2);
-        rightPlayerLabel.setText(game.getPlayers().get(3).getNickname());
-        positionMap.put(game.getPlayers().get(3),3);
+        bottomPlayerLabel.setText(currentGame.getPlayers().get(0).getNickname());
+        positionMap.put(currentGame.getPlayers().get(0),0);
+        leftPlayerLabel.setText(currentGame.getPlayers().get(1).getNickname());
+        positionMap.put(currentGame.getPlayers().get(1),1);
+        topPlayerLabel.setText(currentGame.getPlayers().get(2).getNickname());
+        positionMap.put(currentGame.getPlayers().get(2),2);
+        rightPlayerLabel.setText(currentGame.getPlayers().get(3).getNickname());
+        positionMap.put(currentGame.getPlayers().get(3),3);
     }
 
     public void drawGameBoard(){
 
         int i = 0;
-        for (Player player : game.getPlayers()){
+        for (Player player : currentGame.getPlayers()){
             int j = 0;
             j++;
             for (Card card : player.getPlayerDeck()){
@@ -204,18 +206,21 @@ public class App extends Application {
 
                         // Verifier qu'il s'agit bien du bon joueur qui joue une carte
 
-                        Player nextPlayer = game.getNextPlayerToPlay();
+                        Player nextPlayer = currentGame.getNextPlayerToPlay();
                         if (player.equals(nextPlayer)){
 
-                            Fold foldToPlay = game.getFoldToPlay();
+                            Fold foldToPlay = currentGame.getFoldToPlay();
 
                             boolean validCard = player.isCardValid(foldToPlay,card);
                             if (validCard){
-                                boolean carteJouee = foldToPlay.addCardToFold(game.getContract(),player, card);
+                                boolean carteJouee = foldToPlay.addCardToFold(currentGame.getContract(),player, card);
                                 if (carteJouee){
                                     paneMap.get(positionMap.get(player)).getChildren().remove(btn);
                                     playCard(player,card,foldToPlay.getPlayedCards().size()==1);
-                                    if (game.isFinished()){
+                                    if (currentGame.isFinished()){
+
+                                        partiesJouees.add(currentGame);
+
                                         Button newGameButton = new Button("New Game");
                                         centralZone.add(newGameButton,3,1);
                                         for (Pane pane : paneMap.values()){
@@ -253,7 +258,7 @@ public class App extends Application {
         int columnIndex = 0;
         int rowIndex = 0;
 
-        switch (game.getPlayers().indexOf(player)){
+        switch (currentGame.getPlayers().indexOf(player)){
             case 0 :
                 columnIndex = 1;
                 rowIndex = 2;
