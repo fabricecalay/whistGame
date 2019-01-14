@@ -29,16 +29,14 @@ public class Game {
         Collections.shuffle(gameDeck);
     }
 
-    private void initPlayers(){
-        for (int i=0;i<Constants.NUMBER_OF_PLAYERS;i++){
-            players.add(new Player("Joueur " + (i+1)));
-        }
-        // TODO : Premier joueur de la partie --> en fonction du donneur et en fonction du contrat (par exemple, abondance)
-        firstPlayerToPlay = players.get(0);
+    private void initPlayers(List<Player> players, Player firstPlayer){
+        this.players=players;
+        // Premier joueur de la partie si contrat classique
+        firstPlayerToPlay = firstPlayer;
     }
 
-    public void initGame(){
-        initPlayers();
+    public void initGame(List<Player> players, Player firstPlayer){
+        initPlayers(players, firstPlayer);
         mixDeck();
         distribution();
     }
@@ -185,6 +183,7 @@ public class Game {
             if (lastCompletedFold!=null){
                 return lastCompletedFold.getWinningPlayer(this.contract);
             }else{
+                //TODO : fonction du contrat (abondance, trou, ...)
                 return firstPlayerToPlay;
             }
         }else{

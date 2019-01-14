@@ -48,6 +48,10 @@ public class Player {
         this.nickname = nickname;
     }
 
+    public void cleanPlayerDeck(){
+        playerDeck.clear();
+    }
+
     public List<Card> getPlayerDeck() {
         return playerDeck;
     }

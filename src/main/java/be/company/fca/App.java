@@ -1,9 +1,6 @@
 package be.company.fca;
 
-import be.company.fca.model.Card;
-import be.company.fca.model.Fold;
-import be.company.fca.model.Game;
-import be.company.fca.model.Player;
+import be.company.fca.model.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,7 +14,9 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -31,6 +30,9 @@ public class App extends Application {
         Application.launch(App.class, args);
     }
 
+    private List<Player> players;
+    private Player donneur;
+
     private Game game;
     private Map<Player,Integer> positionMap=new HashMap<>();
     private Map<Integer, Pane> paneMap = new HashMap<>();
@@ -39,6 +41,14 @@ public class App extends Application {
     private Label leftPlayerLabel=new Label();
     private Label topPlayerLabel=new Label();
     private Label rightPlayerLabel=new Label();
+
+    public App() {
+        players = new ArrayList<>();
+        for (int i = 0; i< Constants.NUMBER_OF_PLAYERS; i++){
+            players.add(new Player("Joueur " + (i+1)));
+        }
+        donneur = players.get(0);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -116,6 +126,36 @@ public class App extends Application {
 
     }
 
+    public void cleanPlayersDeck(){
+        for (Player player : players){
+            player.cleanPlayerDeck();
+        }
+    }
+
+    public List<Player> getFourPlayers(){
+        cleanPlayersDeck();
+        if (players.size()==4){
+            return players;
+        }else{
+            int indexDonneur = players.indexOf(donneur);
+            List<Player> playablePlayers=new ArrayList<>();
+            for (int i=0;i<4;i++){
+                playablePlayers.add(players.get((indexDonneur+1+i)%players.size()));
+            }
+            return playablePlayers;
+        }
+    }
+
+    public Player getFirstPlayer(){
+        int indexDonneur = players.indexOf(donneur);
+        return players.get((indexDonneur+1)%players.size());
+    }
+
+    public void nextDonneur(){
+        int indexDonneur = players.indexOf(donneur);
+        donneur = players.get((indexDonneur+1)%players.size());
+    }
+
     public void newGame(){
 
         for (Pane pane : paneMap.values()){
@@ -125,7 +165,7 @@ public class App extends Application {
         centralZone.getChildren().clear();
 
         game = new Game();
-        game.initGame();
+        game.initGame(getFourPlayers(),getFirstPlayer());
 
         positionMap.clear();
         initPlayersNameAndPosition();
@@ -148,8 +188,6 @@ public class App extends Application {
         positionMap.put(game.getPlayers().get(2),2);
         rightPlayerLabel.setText(game.getPlayers().get(3).getNickname());
         positionMap.put(game.getPlayers().get(3),3);
-
-
     }
 
     public void drawGameBoard(){
@@ -186,6 +224,7 @@ public class App extends Application {
                                         newGameButton.setOnAction(new EventHandler<ActionEvent>() {
                                             @Override
                                             public void handle(ActionEvent event) {
+                                                nextDonneur();
                                                 newGame();
                                             }
                                         });
