@@ -173,9 +173,31 @@ public class App extends Application {
         initPlayersNameAndPosition();
 
         currentGame.sortPlayersDeck();
-        currentGame.chooseContract();
 
         drawGameBoard();
+
+        for (Pane pane : paneMap.values()){
+            pane.setDisable(true);
+        }
+
+        selectionContrat();
+
+    }
+
+    public void selectionContrat(){
+        // Premier, annoncer, emballer, passer
+
+        Button btn = new Button("Annoncer");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                currentGame.chooseContract();
+                centralZone.getChildren().clear();
+                enablePlayerDeck(currentGame.getNextPlayerToPlay());
+            }
+        });
+        centralZone.getChildren().add(btn);
+
     }
 
     /**
@@ -217,10 +239,10 @@ public class App extends Application {
                                 if (carteJouee){
                                     paneMap.get(positionMap.get(player)).getChildren().remove(btn);
                                     playCard(player,card,foldToPlay.getPlayedCards().size()==1);
+                                    enablePlayerDeck(currentGame.getNextPlayerToPlay());
+
                                     if (currentGame.isFinished()){
-
                                         partiesJouees.add(currentGame);
-
                                         Button newGameButton = new Button("New Game");
                                         centralZone.add(newGameButton,3,1);
                                         for (Pane pane : paneMap.values()){
@@ -248,6 +270,14 @@ public class App extends Application {
                 j++;
             }
             i++;
+        }
+
+    }
+
+    public void enablePlayerDeck(Player player){
+        Integer playablePosition = positionMap.get(player);
+        for (int i=0;i<4;i++){
+            paneMap.get(i).setDisable(!playablePosition.equals(i));
         }
     }
 

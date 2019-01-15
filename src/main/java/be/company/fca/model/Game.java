@@ -193,6 +193,10 @@ public class Game {
         }
     }
 
+    public Player getNextPlayerToTalk(){
+        return null;
+    }
+
     /**
      * Permet de determiner si la partie est termine
      * Ex : nombre de plis joues, misere perdue

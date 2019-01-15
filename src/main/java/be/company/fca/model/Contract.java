@@ -44,6 +44,9 @@ public class Contract {
     /** Nombre de plis */
     private Integer numberOfFolds;
 
+    private Player annonceur;
+    private Player emballeur;
+
     public Card.CardType getTrump() {
         return trump;
     }
